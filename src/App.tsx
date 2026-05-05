@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  Eye, 
-  MessageCircle, 
-  MapPin, 
-  Mail, 
-  Star, 
-  Menu, 
+import {
+  Eye,
+  MessageCircle,
+  MapPin,
+  Mail,
+  Star,
+  Menu,
   X,
   Clock,
   Sparkles,
@@ -73,9 +73,8 @@ function App() {
 
       {/* Header */}
       <motion.header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-          scrolled ? 'bg-white shadow-md' : 'bg-transparent'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${scrolled ? 'bg-white shadow-md' : 'bg-transparent'
+          }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
@@ -132,27 +131,27 @@ function App() {
         <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white" />
         <div className="absolute top-20 right-10 w-72 h-72 bg-secondary/10 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-10 w-96 h-96 bg-orange-100 rounded-full blur-3xl" />
-        
+
         <div className="max-w-6xl mx-auto px-4 py-32 grid md:grid-cols-2 gap-12 items-center relative z-10">
           <motion.div
             variants={staggerContainer}
             initial="initial"
             animate="animate"
           >
-            <motion.p 
+            <motion.p
               variants={fadeInUp}
               className="text-secondary font-medium mb-4 flex items-center gap-2"
             >
               <Sparkles size={16} /> Óptica Profesional en Mendoza
             </motion.p>
-            <motion.h2 
+            <motion.h2
               variants={fadeInUp}
               className="text-4xl md:text-5xl lg:text-6xl font-bold text-accent leading-tight mb-6"
             >
               Tu Visión,<br />
               <span className="text-secondary">Nuestra Prioridad</span>
             </motion.h2>
-            <motion.p 
+            <motion.p
               variants={fadeInUp}
               className="text-gray-600 text-lg mb-8 max-w-md"
             >
@@ -188,9 +187,9 @@ function App() {
             className="relative"
           >
             <div className="aspect-square max-w-md mx-auto rounded-3xl relative overflow-hidden shadow-2xl group">
-              <img 
-                src="https://images.unsplash.com/photo-1542432389-a40026383873?auto=format&fit=crop&q=80&w=1000" 
-                alt="Óptica Profesional"
+              <img
+                src="https://plus.unsplash.com/premium_photo-1661759620393-c4a075d0db27?auto=format&fit=crop&q=80&w=1000"
+                alt="Persona probándose lentes"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
@@ -217,14 +216,6 @@ function App() {
                 </div>
               </div>
             </div>
-            <motion.div
-              className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-lg"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              <p className="font-bold text-secondary">100%</p>
-              <p className="text-sm text-gray-500">Garantizado</p>
-            </motion.div>
           </motion.div>
         </div>
 
@@ -235,44 +226,6 @@ function App() {
         >
           <ChevronDown className="text-gray-400" size={32} />
         </motion.div>
-      </section>
-
-      {/* Marcas - Carrusel Animado */}
-      <section className="py-16 bg-gray-50 border-y border-gray-100 overflow-hidden">
-        <motion.p
-          className="text-center text-secondary font-medium mb-8"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          Trabajamos con las mejores marcas
-        </motion.p>
-        <div className="relative">
-          <motion.div
-            className="flex gap-12 md:gap-20"
-            animate={{
-              x: [0, -1000]
-            }}
-            transition={{
-              x: {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 20,
-                ease: "linear"
-              }
-            }}
-          >
-            {[...brands, ...brands].map((brand, index) => (
-              <motion.div
-                key={`${brand.name}-${index}`}
-                className="flex-shrink-0 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
-                whileHover={{ scale: 1.1 }}
-              >
-                {brand.logo}
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
       </section>
 
       {/* Servicios */}
@@ -288,7 +241,7 @@ function App() {
             <h3 className="text-3xl md:text-4xl font-bold text-accent">Soluciones Visuales Completas</h3>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {services.map((service, index) => (
               <motion.div
                 key={service.title}
@@ -300,8 +253,8 @@ function App() {
                 whileHover={{ y: -5 }}
               >
                 <div className="h-48 relative overflow-hidden">
-                  <img 
-                    src={service.image} 
+                  <img
+                    src={service.image}
                     alt={service.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
@@ -408,7 +361,7 @@ function App() {
                 <p><span className="font-bold text-accent">2</span> <span className="text-gray-600">seguidos</span></p>
               </div>
               <p className="font-medium text-accent">venta lentes recetados , todos tipos de cristal , lentes sol .</p>
-              <p className="text-gray-600">Tu visión, nuestra prioridad ✨<br/>📍 Mendoza, Argentina<br/>👓 Especialistas en salud visual</p>
+              <p className="text-gray-600">Tu visión, nuestra prioridad ✨<br />📍 Mendoza, Argentina<br />👓 Especialistas en salud visual</p>
             </div>
           </motion.div>
 
@@ -425,8 +378,8 @@ function App() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <img 
-                  src={post.image} 
+                <img
+                  src={post.image}
                   alt={post.placeholder}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -553,13 +506,13 @@ function App() {
               <h4 className="font-bold flex items-center gap-2"><MapPin size={18} className="text-secondary" /> Óptica Punto Vision</h4>
               <p className="text-sm text-gray-600">Mendoza, Argentina</p>
             </div>
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107134.74659223707!2d-68.9137256561273!3d-32.88334468205423!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e093ec4517927%3A0xfe8eace0d59ce441!2sMendoza%2C%20Capital%2C%20Mendoza!5e0!3m2!1ses-419!2sar!4v1713636500000!5m2!1ses-419!2sar" 
-              width="100%" 
-              height="100%" 
-              style={{ border: 0 }} 
-              allowFullScreen={true} 
-              loading="lazy" 
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107134.74659223707!2d-68.9137256561273!3d-32.88334468205423!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e093ec4517927%3A0xfe8eace0d59ce441!2sMendoza%2C%20Capital%2C%20Mendoza!5e0!3m2!1ses-419!2sar!4v1713636500000!5m2!1ses-419!2sar"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen={true}
+              loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
           </motion.div>
@@ -589,18 +542,6 @@ function App() {
 
 const services = [
   {
-    icon: Eye,
-    title: 'Exámenes Visuales',
-    description: 'Evaluaciones completas de la vista con tecnología de última generación para detectar cualquier anomalía.',
-    image: 'https://images.unsplash.com/photo-1517948430535-1e2469d314fe?auto=format&fit=crop&q=80&w=800'
-  },
-  {
-    icon: Sparkles,
-    title: 'Lentes de Contacto',
-    description: 'Amplia variedad de lentes de contacto blandos, rígidos y especiales. Adaptaciones personalizadas.',
-    image: 'https://plus.unsplash.com/premium_photo-1663048816150-1638f707cea2?auto=format&fit=crop&q=80&w=800'
-  },
-  {
     icon: Shield,
     title: 'Armazones',
     description: 'Selección exclusiva de marcas líderes en anteojos oftálmicos y solares con garantía authentic.',
@@ -609,13 +550,13 @@ const services = [
   {
     icon: Star,
     title: 'Tratamientos Especiales',
-    description: 'Antireflejo, endurecido, tintado y más tratamentos para tus lentes con los mejores materiales.',
+    description: 'Antireflejo, filtro contra luz azul nociva, tintado y más tratamientos para tus lentes con los mejores materiales.',
     image: 'https://images.unsplash.com/photo-1616163477138-508df4131a38?auto=format&fit=crop&q=80&w=800'
   },
   {
     icon: MessageCircle,
     title: 'Asesoría Personalizada',
-    description: 'Te guiaremos para encontrar la mejor solución visual según tu estilo de vida y necesidades.',
+    description: 'Te esperamos con tu receta médica para asesorarte en armazones y cristales que se adaptan a tu graduación.',
     image: 'https://images.unsplash.com/photo-1539036776273-021ec1d78bec?auto=format&fit=crop&q=80&w=800'
   },
   {
@@ -656,76 +597,6 @@ const testimonials = [
     name: 'Diego Herrera',
     text: 'Hace años que somos clientes con toda mi familia. Siempre nos asesoran de 10 y tienen los mejores precios de Mendoza.',
     date: 'Hace 5 meses'
-  }
-]
-
-const brands = [
-  {
-    name: 'Ray-Ban',
-    logo: (
-      <svg className="h-10 md:h-12" viewBox="0 0 140 40">
-        <text x="0" y="30" fontSize="24" fontWeight="900" fill="#000">Ray-Ban</text>
-      </svg>
-    )
-  },
-  {
-    name: 'Oakley',
-    logo: (
-      <svg className="h-10 md:h-12" viewBox="0 0 100 40">
-        <path d="M10 10 L25 10 L20 30 L35 30 L30 10 L45 10 L40 30 L55 30 L50 10 L65 10 L70 30 L85 30 L75 5 L55 5 L60 20 L50 20 L45 5 L25 5 Z" fill="#000"/>
-      </svg>
-    )
-  },
-  {
-    name: 'Persol',
-    logo: (
-      <svg className="h-10 md:h-12" viewBox="0 0 100 40">
-        <text x="5" y="28" fontSize="22" fontWeight="bold" fill="#000">PERSOL</text>
-      </svg>
-    )
-  },
-  {
-    name: 'Maui Jim',
-    logo: (
-      <svg className="h-10 md:h-12" viewBox="0 0 140 40">
-        <text x="0" y="22" fontSize="14" fontWeight="bold" fill="#000">MAUI JIM</text>
-        <text x="0" y="36" fontSize="10" fill="#000">HAWAII</text>
-      </svg>
-    )
-  },
-  {
-    name: 'Vogue',
-    logo: (
-      <svg className="h-10 md:h-12" viewBox="0 0 90 40">
-        <text x="0" y="30" fontSize="22" fontWeight="bold" fill="#000">VOGUE</text>
-        <circle cx="85" cy="10" r="4" fill="#000"/>
-      </svg>
-    )
-  },
-  {
-    name: 'Polaroid',
-    logo: (
-      <svg className="h-10 md:h-12" viewBox="0 0 130 40">
-        <rect x="5" y="5" width="20" height="18" fill="#FFE600"/>
-        <text x="30" y="25" fontSize="18" fontWeight="bold" fill="#000">Polaroid</text>
-      </svg>
-    )
-  },
-  {
-    name: 'Arnette',
-    logo: (
-      <svg className="h-10 md:h-12" viewBox="0 0 110 40">
-        <text x="0" y="28" fontSize="20" fontWeight="bold" fill="#000">ARNETTE</text>
-      </svg>
-    )
-  },
-  {
-    name: 'Carrera',
-    logo: (
-      <svg className="h-10 md:h-12" viewBox="0 0 110 40">
-        <text x="5" y="28" fontSize="22" fontWeight="bold" fill="#000">CARRERA</text>
-      </svg>
-    )
   }
 ]
 
