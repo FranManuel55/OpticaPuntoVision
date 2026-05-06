@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  Eye,
   MessageCircle,
   MapPin,
   Mail,
@@ -19,7 +18,17 @@ import {
 const InstagramIcon = Instagram
 
 const WA_NUMBER = '2615353715'
+const WA_PHONE = WA_NUMBER.replace(/\D/g, '')
 const EMAIL = 'opticapuntovisionmza@gmail.com'
+
+const waLink = (message: string) =>
+  `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(message)}`
+
+const WA_MESSAGES = {
+  floating: '¡Hola! Estoy navegando en su sitio web y quería hacer una consulta.',
+  heroCTA: '¡Hola! Vi su sitio web y me gustaría consultar sobre los servicios y productos de Óptica Punto Vision.',
+  contact: '¡Hola! Quería más información sobre Óptica Punto Vision.',
+}
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -38,6 +47,7 @@ const staggerContainer = {
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [formData, setFormData] = useState({ name: '', phone: '', message: '' })
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,18 +58,32 @@ function App() {
   }, [])
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
     setIsMenuOpen(false)
+    setTimeout(() => {
+      const element = document.getElementById(id)
+      if (!element) return
+      const headerOffset = 80
+      const top = element.getBoundingClientRect().top + window.scrollY - headerOffset
+      window.scrollTo({ top, behavior: 'smooth' })
+    }, 150)
+  }
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    const { name, phone, message } = formData
+    const text =
+      `¡Hola! Quería solicitar un turno en Óptica Punto Vision.\n` +
+      `Mi nombre es: ${name}\n` +
+      `Mi teléfono es: ${phone}\n` +
+      `Y queria consultar sobre: ${message}`
+    window.open(waLink(text), '_blank')
   }
 
   return (
     <div className="min-h-screen bg-primary">
       {/* Floating WhatsApp CTA */}
       <motion.a
-        href={`https://wa.me/${WA_NUMBER.replace(/\D/g, '')}`}
+        href={waLink(WA_MESSAGES.floating)}
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-shadow"
@@ -81,9 +105,7 @@ function App() {
       >
         <nav className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
-              <Eye className="text-white" size={24} />
-            </div>
+            <img src="/logo.png" alt="Punto Vision" className="w-12 h-12 object-contain" />
             <div>
               <h1 className="text-xl font-bold text-accent">Punto Vision</h1>
               <p className="text-xs text-gray-500">Óptica Profesional</p>
@@ -159,7 +181,7 @@ function App() {
             </motion.p>
             <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
               <motion.a
-                href={`https://wa.me/${WA_NUMBER.replace(/\D/g, '')}`}
+                href={waLink(WA_MESSAGES.heroCTA)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-secondary text-white px-8 py-4 rounded-full font-medium hover:bg-opacity-90 transition-all shadow-lg hover:shadow-xl flex items-center gap-2"
@@ -188,8 +210,8 @@ function App() {
           >
             <div className="aspect-square max-w-md mx-auto rounded-3xl relative overflow-hidden shadow-2xl group">
               <img
-                src="https://plus.unsplash.com/premium_photo-1661759620393-c4a075d0db27?auto=format&fit=crop&q=80&w=1000"
-                alt="Persona probándose lentes"
+                src="/frente.jpeg"
+                alt="Óptica Punto Vision"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
@@ -413,7 +435,7 @@ function App() {
 
               <div className="space-y-6">
                 <motion.a
-                  href={`https://wa.me/${WA_NUMBER.replace(/\D/g, '')}`}
+                  href={waLink(WA_MESSAGES.contact)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-colors"
@@ -422,7 +444,7 @@ function App() {
                   <MessageCircle className="text-secondary" size={24} />
                   <div>
                     <p className="font-medium">WhatsApp</p>
-                    <p className="text-gray-400">+54 {WA_NUMBER}</p>
+                    <p className="text-gray-400">+54 261 535 3715</p>
                   </div>
                 </motion.a>
 
@@ -442,7 +464,7 @@ function App() {
                   <MapPin className="text-secondary" size={24} />
                   <div>
                     <p className="font-medium">Dirección</p>
-                    <p className="text-gray-400">Mendoza, Argentina</p>
+                    <p className="text-gray-400">Calle L.N.Alem 184, Ciudad, Mendoza, Argentina</p>
                   </div>
                 </div>
 
@@ -458,11 +480,14 @@ function App() {
 
             <div className="bg-white rounded-2xl p-8 text-accent">
               <h4 className="text-xl font-bold mb-6">Solicita tu Turno</h4>
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-4" onSubmit={handleFormSubmit}>
                 <div>
                   <label className="block text-sm font-medium mb-2">Nombre</label>
                   <input
                     type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-secondary"
                     placeholder="Tu nombre"
                   />
@@ -471,6 +496,9 @@ function App() {
                   <label className="block text-sm font-medium mb-2">Teléfono</label>
                   <input
                     type="tel"
+                    required
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-secondary"
                     placeholder="Tu teléfono"
                   />
@@ -478,6 +506,9 @@ function App() {
                 <div>
                   <label className="block text-sm font-medium mb-2">Mensaje</label>
                   <textarea
+                    required
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-secondary resize-none"
                     rows={4}
                     placeholder="¿En qué podemos ayudarte?"
@@ -489,7 +520,7 @@ function App() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Enviar Mensaje
+                  Enviar por WhatsApp
                 </motion.button>
               </form>
             </div>
@@ -504,10 +535,10 @@ function App() {
           >
             <div className="absolute top-4 left-4 bg-white/90 backdrop-blur text-accent p-4 rounded-xl shadow-lg z-10">
               <h4 className="font-bold flex items-center gap-2"><MapPin size={18} className="text-secondary" /> Óptica Punto Vision</h4>
-              <p className="text-sm text-gray-600">Mendoza, Argentina</p>
+              <p className="text-sm text-gray-600">Calle L.N.Alem 184, Ciudad, Mendoza, Argentina</p>
             </div>
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107134.74659223707!2d-68.9137256561273!3d-32.88334468205423!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e093ec4517927%3A0xfe8eace0d59ce441!2sMendoza%2C%20Capital%2C%20Mendoza!5e0!3m2!1ses-419!2sar!4v1713636500000!5m2!1ses-419!2sar"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3349.123!2d-68.83748!3d-32.892824!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e09170b9dcadb%3A0x41247132b731a735!2sPunto%20Vision!5e0!3m2!1ses-419!2sar!4v1714000000000!5m2!1ses-419!2sar"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -524,9 +555,7 @@ function App() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
-                <Eye className="text-white" size={20} />
-              </div>
+              <img src="/logo.png" alt="Punto Vision" className="w-10 h-10 object-contain" />
               <div>
                 <p className="font-bold">Punto Vision</p>
                 <p className="text-xs text-gray-400">Tu visión, nuestra prioridad</p>
@@ -551,7 +580,7 @@ const services = [
     icon: Star,
     title: 'Tratamientos Especiales',
     description: 'Antireflejo, filtro contra luz azul nociva, tintado y más tratamientos para tus lentes con los mejores materiales.',
-    image: 'https://images.unsplash.com/photo-1616163477138-508df4131a38?auto=format&fit=crop&q=80&w=800'
+    image: '/gallery.jpeg'
   },
   {
     icon: MessageCircle,
