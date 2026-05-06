@@ -166,6 +166,12 @@ function App() {
             >
               <Sparkles size={16} /> Óptica Profesional en Mendoza
             </motion.p>
+            <motion.p
+              variants={fadeInUp}
+              className="text-gray-500 text-sm md:text-base mb-3 flex items-center gap-2"
+            >
+              <MapPin size={16} className="text-secondary" /> Calle L.N.Alem 184, Ciudad, Mendoza
+            </motion.p>
             <motion.h2
               variants={fadeInUp}
               className="text-4xl md:text-5xl lg:text-6xl font-bold text-accent leading-tight mb-6"
@@ -250,6 +256,22 @@ function App() {
         </motion.div>
       </section>
 
+      {/* Tipos de Cristales - Carrusel */}
+      <section className="py-12 bg-gray-50 border-y border-gray-100 overflow-hidden">
+        <motion.div
+          className="flex gap-16 md:gap-24 items-center whitespace-nowrap"
+          animate={{ x: ['0%', '-50%'] }}
+          transition={{ x: { repeat: Infinity, ease: 'linear', duration: 20 } }}
+        >
+          {[...lensTypes, ...lensTypes, ...lensTypes, ...lensTypes].map((name, i) => (
+            <div key={i} className="flex items-center gap-16 md:gap-24 flex-shrink-0">
+              <span className="text-lg md:text-xl font-medium text-gray-400">{name}</span>
+              <Sparkles className="text-secondary/60 flex-shrink-0" size={18} />
+            </div>
+          ))}
+        </motion.div>
+      </section>
+
       {/* Servicios */}
       <section id="servicios" className="py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4">
@@ -278,7 +300,9 @@ function App() {
                   <img
                     src={service.image}
                     alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className={`w-full h-full transition-transform duration-500 group-hover:scale-110 ${
+                      service.image === '/gallery.jpeg' ? 'object-contain' : 'object-cover'
+                    }`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-4 left-4 w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/30 text-white shadow-lg">
@@ -569,18 +593,20 @@ function App() {
   )
 }
 
+const lensTypes = ['Monofocales', 'Bifocales', 'Multifocales', 'HD']
+
 const services = [
   {
     icon: Shield,
     title: 'Armazones',
     description: 'Selección exclusiva de marcas líderes en anteojos oftálmicos y solares con garantía authentic.',
-    image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&q=80&w=800'
+    image: '/gallery.jpeg'
   },
   {
     icon: Star,
     title: 'Tratamientos Especiales',
     description: 'Antireflejo, filtro contra luz azul nociva, tintado y más tratamientos para tus lentes con los mejores materiales.',
-    image: '/gallery.jpeg'
+    image: 'https://images.unsplash.com/photo-1616163477138-508df4131a38?auto=format&fit=crop&q=80&w=800'
   },
   {
     icon: MessageCircle,
