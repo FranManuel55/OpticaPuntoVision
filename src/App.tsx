@@ -20,6 +20,7 @@ const InstagramIcon = Instagram
 const WA_NUMBER = '2615353715'
 const WA_PHONE = WA_NUMBER.replace(/\D/g, '')
 const EMAIL = 'opticapuntovisionmza@gmail.com'
+const INSTAGRAM_URL = 'https://www.instagram.com/opticapuntovisionmza/'
 
 const waLink = (message: string) =>
   `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(message)}`
@@ -261,12 +262,11 @@ function App() {
         <motion.div
           className="flex gap-16 md:gap-24 items-center whitespace-nowrap"
           animate={{ x: ['0%', '-50%'] }}
-          transition={{ x: { repeat: Infinity, ease: 'linear', duration: 20 } }}
+          transition={{ x: { repeat: Infinity, ease: 'linear', duration: 80 } }}
         >
-          {[...lensTypes, ...lensTypes, ...lensTypes, ...lensTypes].map((name, i) => (
+          {[...carouselImages, ...carouselImages, ...carouselImages, ...carouselImages, ...carouselImages, ...carouselImages].map((imgSrc, i) => (
             <div key={i} className="flex items-center gap-16 md:gap-24 flex-shrink-0">
-              <span className="text-lg md:text-xl font-medium text-gray-400">{name}</span>
-              <Sparkles className="text-secondary/60 flex-shrink-0" size={18} />
+              <img src={imgSrc} alt="Cristal" className="h-48 md:h-72 object-contain rounded-2xl shadow-md" />
             </div>
           ))}
         </motion.div>
@@ -296,13 +296,12 @@ function App() {
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
               >
-                <div className="h-48 relative overflow-hidden">
+                <div className="h-52 relative overflow-hidden">
                   <img
                     src={service.image}
                     alt={service.title}
-                    className={`w-full h-full transition-transform duration-500 group-hover:scale-110 ${
-                      service.image === '/gallery.jpeg' ? 'object-contain' : 'object-cover'
-                    }`}
+                    className={`w-full h-full transition-transform duration-500 group-hover:scale-110 ${service.image.startsWith('/') ? 'object-contain' : 'object-cover'
+                      }`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-4 left-4 w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/30 text-white shadow-lg">
@@ -388,9 +387,16 @@ function App() {
             </div>
             <div className="flex-1 text-center md:text-left">
               <div className="flex flex-col md:flex-row md:items-center gap-4 mb-4 justify-center md:justify-start">
-                <h3 className="text-2xl font-bold text-accent">opticapuntovisionmza</h3>
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-2xl font-bold text-accent hover:text-secondary transition-colors"
+                >
+                  @opticapuntovisionmza
+                </a>
                 <motion.a
-                  href="https://instagram.com/opticapuntovisionmza"
+                  href={INSTAGRAM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#0095f6] text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-600 transition-colors inline-flex items-center justify-center gap-2"
@@ -438,6 +444,25 @@ function App() {
               </motion.a>
             ))}
           </div>
+
+          <motion.div
+            className="text-center mt-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <motion.a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 text-white px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transition-shadow"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <InstagramIcon size={20} />
+              Ver todas las publicaciones en Instagram
+            </motion.a>
+          </motion.div>
         </div>
       </section>
 
@@ -593,7 +618,7 @@ function App() {
   )
 }
 
-const lensTypes = ['Monofocales', 'Bifocales', 'Multifocales', 'HD']
+const carouselImages = ['/monofocal.jpeg', '/bifocal.jpeg', '/ocupacional.jpeg', '/multifocal.jpeg']
 
 const services = [
   {
@@ -606,19 +631,19 @@ const services = [
     icon: Star,
     title: 'Tratamientos Especiales',
     description: 'Antireflejo, filtro contra luz azul nociva, tintado y más tratamientos para tus lentes con los mejores materiales.',
-    image: 'https://images.unsplash.com/photo-1616163477138-508df4131a38?auto=format&fit=crop&q=80&w=800'
+    image: '/tratamiento.jpeg'
   },
   {
     icon: MessageCircle,
     title: 'Asesoría Personalizada',
     description: 'Te esperamos con tu receta médica para asesorarte en armazones y cristales que se adaptan a tu graduación.',
-    image: 'https://images.unsplash.com/photo-1539036776273-021ec1d78bec?auto=format&fit=crop&q=80&w=800'
+    image: '/receta.jpeg'
   },
   {
     icon: Clock,
     title: 'Entrega Rápida',
     description: 'Tiempo de entrega optimizado sin comprometer la calidad de nuestros productos y servicios.',
-    image: 'https://images.unsplash.com/photo-1615552441070-cbe0d49f5ae9?auto=format&fit=crop&q=80&w=800'
+    image: '/entrega.jpeg'
   }
 ]
 
@@ -656,14 +681,14 @@ const testimonials = [
 ]
 
 const instagramPosts = [
-  { id: 1, placeholder: 'Promo Lentes', link: 'https://instagram.com/opticapuntovisionmza', image: 'https://images.unsplash.com/photo-1612226192636-cafce2d8a728?w=400&h=400&fit=crop' },
-  { id: 2, placeholder: 'Nueva Colección', link: 'https://instagram.com/opticapuntovisionmza', image: 'https://images.unsplash.com/photo-1517948430535-1e2469d314fe?w=400&h=400&fit=crop' },
-  { id: 3, placeholder: 'Tips Visuales', link: 'https://instagram.com/opticapuntovisionmza', image: 'https://images.unsplash.com/photo-1632054224477-c9cb3aae1b7e?w=400&h=400&fit=crop' },
-  { id: 4, placeholder: 'Opiniones', link: 'https://instagram.com/opticapuntovisionmza', image: 'https://images.unsplash.com/photo-1539036776273-021ec1d78bec?w=400&h=400&fit=crop' },
-  { id: 5, placeholder: 'Descuentos', link: 'https://instagram.com/opticapuntovisionmza', image: 'https://images.unsplash.com/photo-1632054226038-ed6997bfce1f?w=400&h=400&fit=crop' },
-  { id: 6, placeholder: 'Galería', link: 'https://instagram.com/opticapuntovisionmza', image: 'https://plus.unsplash.com/premium_photo-1663048816150-1638f707cea2?w=400&h=400&fit=crop' },
-  { id: 7, placeholder: 'Productos', link: 'https://instagram.com/opticapuntovisionmza', image: 'https://images.unsplash.com/photo-1616163477138-508df4131a38?w=400&h=400&fit=crop' },
-  { id: 8, placeholder: 'Clientes', link: 'https://instagram.com/opticapuntovisionmza', image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400&h=400&fit=crop' }
+  { id: 1, placeholder: 'Promo Lentes', link: INSTAGRAM_URL, image: 'https://images.unsplash.com/photo-1612226192636-cafce2d8a728?w=400&h=400&fit=crop' },
+  { id: 2, placeholder: 'Nueva Colección', link: INSTAGRAM_URL, image: 'https://images.unsplash.com/photo-1517948430535-1e2469d314fe?w=400&h=400&fit=crop' },
+  { id: 3, placeholder: 'Tips Visuales', link: INSTAGRAM_URL, image: 'https://images.unsplash.com/photo-1632054224477-c9cb3aae1b7e?w=400&h=400&fit=crop' },
+  { id: 4, placeholder: 'Opiniones', link: INSTAGRAM_URL, image: 'https://images.unsplash.com/photo-1539036776273-021ec1d78bec?w=400&h=400&fit=crop' },
+  { id: 5, placeholder: 'Descuentos', link: INSTAGRAM_URL, image: 'https://images.unsplash.com/photo-1632054226038-ed6997bfce1f?w=400&h=400&fit=crop' },
+  { id: 6, placeholder: 'Galería', link: INSTAGRAM_URL, image: 'https://plus.unsplash.com/premium_photo-1663048816150-1638f707cea2?w=400&h=400&fit=crop' },
+  { id: 7, placeholder: 'Productos', link: INSTAGRAM_URL, image: 'https://images.unsplash.com/photo-1616163477138-508df4131a38?w=400&h=400&fit=crop' },
+  { id: 8, placeholder: 'Clientes', link: INSTAGRAM_URL, image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400&h=400&fit=crop' }
 ]
 
 export default App
