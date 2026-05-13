@@ -260,13 +260,17 @@ function App() {
       {/* Tipos de Cristales - Carrusel */}
       <section className="py-12 bg-gray-50 border-y border-gray-100 overflow-hidden">
         <motion.div
-          className="flex gap-16 md:gap-24 items-center whitespace-nowrap"
+          className="flex w-max"
           animate={{ x: ['0%', '-50%'] }}
           transition={{ x: { repeat: Infinity, ease: 'linear', duration: 20 } }}
         >
-          {[...carouselImages, ...carouselImages, ...carouselImages, ...carouselImages, ...carouselImages, ...carouselImages].map((imgSrc, i) => (
-            <div key={i} className="flex items-center gap-16 md:gap-24 flex-shrink-0">
-              <img src={imgSrc} alt="Cristal" className="h-48 md:h-72 object-contain rounded-2xl shadow-md" />
+          {[0, 1].map((set) => (
+            <div key={set} className="flex gap-16 md:gap-24 pr-16 md:pr-24 items-center flex-shrink-0">
+              {[...carouselImages, ...carouselImages, ...carouselImages].map((imgSrc, i) => (
+                <div key={i} className="flex items-center flex-shrink-0">
+                  <img src={imgSrc} alt="Cristal" className="h-48 md:h-72 object-contain rounded-2xl shadow-md" />
+                </div>
+              ))}
             </div>
           ))}
         </motion.div>
