@@ -262,7 +262,7 @@ function App() {
         <motion.div
           className="flex gap-16 md:gap-24 items-center whitespace-nowrap"
           animate={{ x: ['0%', '-50%'] }}
-          transition={{ x: { repeat: Infinity, ease: 'linear', duration: 80 } }}
+          transition={{ x: { repeat: Infinity, ease: 'linear', duration: 20 } }}
         >
           {[...carouselImages, ...carouselImages, ...carouselImages, ...carouselImages, ...carouselImages, ...carouselImages].map((imgSrc, i) => (
             <div key={i} className="flex items-center gap-16 md:gap-24 flex-shrink-0">
