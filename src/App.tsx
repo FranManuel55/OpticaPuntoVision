@@ -521,7 +521,7 @@ function App() {
                   <Clock className="text-secondary" size={24} />
                   <div>
                     <p className="font-medium">Horarios</p>
-                    <p className="text-gray-400">Lun a Vie: 9hs - 19hs | Sáb: 9hs - 13hs</p>
+                    <p className="text-gray-400">Lun a Vie: 10hs - 19hs | Sáb: 9hs - 14hs</p>
                   </div>
                 </div>
               </div>
